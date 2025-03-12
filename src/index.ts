@@ -10,11 +10,14 @@ import { authenticate } from "./middlewares/auth.middleware";
 import productRouter from "./routes/product.routes";
 import categoryRouter from "./routes/category.routes";
 import subCategoryRouter from "./routes/subCategory.routes";
+import cors from "cors"
 
 
 const PORT = config.PORT;
 
 const app: Application = express();
+
+app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 
 connectDB()
 

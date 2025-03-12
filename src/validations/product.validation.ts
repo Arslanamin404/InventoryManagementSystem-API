@@ -13,7 +13,7 @@ export const createProductValidation = [
 
     body("subcategory_id")
         .optional()
-        .isMongoId().withMessage("Invalid category_id. Please enter a valid category_id"),
+        .isMongoId().withMessage("Invalid subcategory_id. Please enter a valid category_id"),
 
     body("price")
         .notEmpty().withMessage("product price is required")

@@ -9,11 +9,15 @@ export class ProductServices {
     }
 
     static async findProductByID(id: string): Promise<IProduct | null> {
-        return await Product.findById(id);
+        return await Product.findById(id)
+            .populate("category_id", "name")
+            .populate("subcategory_id", "name");;
     }
 
     static async findProductBySlug(slug: string): Promise<IProduct | null> {
-        return await Product.findOne({ slug });
+        return await Product.findOne({ slug })
+            .populate("category_id", "name")
+            .populate("subcategory_id", "name");;
     }
 
     static async deleteProduct(id: string): Promise<IProduct | null> {
@@ -29,7 +33,9 @@ export class ProductServices {
         return await Product.find(filters)
             .skip((page - 1) * limit)
             .limit(limit)
-            .lean(); //faster query
+            .lean() //faster query
+            .populate("category_id", "name")
+            .populate("subcategory_id", "name");
     }
 
     static async countProducts(filters = {}) {

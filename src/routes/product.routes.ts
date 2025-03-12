@@ -52,7 +52,7 @@ productRouter.delete("/:id", (req: Request, res: Response, next: NextFunction) =
 })
 
 productRouter.get("/isLowStock/:id", (req: Request, res: Response, next: NextFunction) => {
-    ProductControllers.deleteProduct(req, res, next)
+    ProductControllers.isLowStock(req, res, next)
 })
 
 export default productRouter

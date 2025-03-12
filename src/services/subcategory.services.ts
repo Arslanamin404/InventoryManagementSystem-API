@@ -2,6 +2,10 @@ import { ISubcategory } from "../interfaces/ISubcategory";
 import { Subcategory } from "../models/subcategory.model";
 
 export class SubcategoryServices {
+    static async checkExistingSubcategoryByID(id: string): Promise<Boolean> {
+        const subcategory = await Subcategory.findById(id)
+        return !!subcategory;
+    }
     static async checkExistingSubcategory(slug: string): Promise<Boolean> {
         const subcategory = await Subcategory.findOne({ slug })
         return !!subcategory;
@@ -25,6 +29,6 @@ export class SubcategoryServices {
     }
 
     static async getAllSubcategories(): Promise<ISubcategory[]> {
-        return await Subcategory.find()
+        return await Subcategory.find().populate("category_id", "name")
     }
 }

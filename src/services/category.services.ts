@@ -3,6 +3,10 @@ import { Category } from "../models/category.model";
 
 
 export class CategoryServices {
+    static async checkExistingCategoryByID(id: string): Promise<Boolean> {
+        const category = await Category.findById(id)
+        return !!category;
+    }
     static async checkExistingCategory(slug: string): Promise<Boolean> {
         const category = await Category.findOne({ slug })
         return !!category;

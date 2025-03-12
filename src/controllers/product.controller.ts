@@ -5,6 +5,8 @@ import { ProductServices } from "../services/product.services";
 import { IProduct } from "../interfaces/IProduct";
 import { InventoryLogServices } from "../services/inventoryLog.services";
 import { IInventoryLog } from "../interfaces/IInventoryLog";
+import { CategoryServices } from "../services/category.services";
+import { SubcategoryServices } from "../services/subcategory.services";
 
 
 export class ProductControllers {
@@ -37,16 +39,29 @@ export class ProductControllers {
                 return ApiResponse(res, 400, false, "Product with this name already exists");
             }
 
+            const isCategoryExisting = await CategoryServices.checkExistingCategoryByID(category_id)
+            if (!isCategoryExisting)
+                return ApiResponse(res, 400, false, "Invalid category_id. No category exists with the given category id")
+
+            if (subcategory_id) {
+                const isSubcategoryExisting = await SubcategoryServices.checkExistingSubcategoryByID(subcategory_id)
+                if (!isSubcategoryExisting)
+                    return ApiResponse(res, 400, false, "Invalid subcategory_id. No subcategory exists with the given category id")
+            }
+
+
+
             const new_product: Partial<IProduct> = { name, description, category_id, subcategory_id, slug, price: parsed_price, quantity: parsed_quantity, lowStockThreshold }
             const product = await ProductServices.createProduct(new_product)
+
+            const populatedProduct = await ProductServices.findProductByID(product.id);
 
             const log: Partial<IInventoryLog> = { product_id: product.id, action: "ADDED", quantityChange: parsed_quantity, performedBy: user.id }
 
             await InventoryLogServices.createLog(log)
 
 
-
-            return ApiResponse(res, 201, true, "Product created successfully", undefined, product);
+            return ApiResponse(res, 201, true, "Product created successfully", undefined, { product: populatedProduct });
         } catch (error) {
             next(error);
         }

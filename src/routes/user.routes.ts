@@ -26,23 +26,23 @@ userRouter.post("/verify-change-email-otp", (req: Request, res: Response, next: 
     UserControllers.verifyEmailChangeOtp(req, res, next);
 })
 
-userRouter.get("/", authorizeRole(["admin"]), (req: Request, res: Response, next: NextFunction) => {
+userRouter.get("/", authorizeRole(["admin", "ADMIN"]), (req: Request, res: Response, next: NextFunction) => {
     UserControllers.fetchAllUsers(req, res, next);
 })
 
-userRouter.get("/:id", authorizeRole(["admin"]), (req: Request, res: Response, next: NextFunction) => {
+userRouter.get("/:id", authorizeRole(["admin", "ADMIN"]), (req: Request, res: Response, next: NextFunction) => {
     UserControllers.fetchUserById(req, res, next);
 })
 
-userRouter.put("/:id", authorizeRole(["admin"]), (req: Request, res: Response, next: NextFunction) => {
+userRouter.put("/:id", authorizeRole(["admin", "ADMIN"]), (req: Request, res: Response, next: NextFunction) => {
     UserControllers.updateUser(req, res, next);
 })
 
-userRouter.put("/update-role/:id", authorizeRole(["admin"]), (req: Request, res: Response, next: NextFunction) => {
+userRouter.put("/update-role/:id", authorizeRole(["admin", "ADMIN"]), (req: Request, res: Response, next: NextFunction) => {
     UserControllers.updateUserRole(req, res, next);
 })
 
-userRouter.delete("/:id", authorizeRole(["admin"]), (req: Request, res: Response, next: NextFunction) => {
+userRouter.delete("/:id", authorizeRole(["admin", "ADMIN"]), (req: Request, res: Response, next: NextFunction) => {
     UserControllers.deleteUser(req, res, next);
 })
 

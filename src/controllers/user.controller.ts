@@ -71,10 +71,10 @@ export class UserControllers {
                 return ApiResponse(res, 400, false, "User not found")
             }
 
-            const { newEmail } = req.body;
-            if (!newEmail) return ApiResponse(res, 400, false, "New email is required");
+            const { new_email } = req.body;
+            if (!new_email) return ApiResponse(res, 400, false, "New email is required");
 
-            const existingUser = await AuthServices.findUserByEmail(newEmail);
+            const existingUser = await AuthServices.findUserByEmail(new_email);
             if (existingUser)
                 return ApiResponse(res, 400, false, "Email already in use")
 
@@ -86,7 +86,7 @@ export class UserControllers {
             user.otpExpiresAt = otpExpiresIn
             await user.save()
 
-            await sendEmail(newEmail, "Confirm Your New Email Address", undefined,
+            await sendEmail(new_email, "Confirm Your New Email Address", undefined,
                 `
                 <p>Your OTP for changing your email is:</p>
                 <h2>${otp}</h2>

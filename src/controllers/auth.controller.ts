@@ -175,7 +175,7 @@ export class AuthControllers {
 
     static async logout(req: Request, res: Response, next: NextFunction) {
         try {
-            const incomingRefreshToken = req.cookies.refreshToken || req.body.refreshToken;
+            const incomingRefreshToken = req.cookies.refresh_token || req.body.refresh_token;
 
             if (!incomingRefreshToken) {
                 return ApiResponse(res, 400, false, "Invalid Token")

@@ -8,11 +8,21 @@ export class InventoryLogServices {
     }
 
     static async getAllLogs(): Promise<IInventoryLog[]> {
-        return await InventoryLog.find().populate("user", "first_name email phone_number role");
+        return await InventoryLog.find()
+            .populate("performedBy", "first_name username email phone_number role")
+            .populate("product_id", "name slug price quantity");
     }
 
     static async getLogByID(id: string): Promise<IInventoryLog | null> {
-        return await InventoryLog.findById(id).populate("user", "first_name username email phone_number role");
+        return await InventoryLog.findById(id)
+            .populate("performedBy", "first_name username email phone_number role")
+            .populate("product_id", "name slug price quantity");
+    }
+
+    static async getLogsByUserID(id: string): Promise<IInventoryLog[]> {
+        return await InventoryLog.find({ performedBy: id })
+            .populate("performedBy", "first_name username email phone_number role")
+            .populate("product_id", "name slug price quantity");
     }
 
 }

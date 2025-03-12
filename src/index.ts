@@ -11,6 +11,7 @@ import productRouter from "./routes/product.routes";
 import categoryRouter from "./routes/category.routes";
 import subCategoryRouter from "./routes/subCategory.routes";
 import cors from "cors"
+import inventoryLogRouter from "./routes/inventorylog.routes";
 
 
 const PORT = config.PORT;
@@ -32,7 +33,7 @@ app.use("/api/v1/users", authenticate, userRouter);
 app.use("/api/v1/products", authenticate, productRouter);
 app.use("/api/v1/categories", authenticate, categoryRouter);
 app.use("/api/v1/subcategories", authenticate, subCategoryRouter);
-app.use("/api/v1/inventory-logs", authenticate, subCategoryRouter);
+app.use("/api/v1/inventory-logs", authenticate, inventoryLogRouter);
 
 
 // Error handler should be the LAST middleware

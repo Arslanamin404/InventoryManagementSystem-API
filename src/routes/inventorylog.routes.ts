@@ -12,4 +12,8 @@ inventoryLogRouter.get("/:id", (req: Request, res: Response, next: NextFunction)
     InventoryLogControllers.fetchLogByID(req, res, next)
 })
 
+inventoryLogRouter.get("/user/:id", (req: Request, res: Response, next: NextFunction) => {
+    InventoryLogControllers.fetchLogByUserID(req, res, next)
+})
+
 export default inventoryLogRouter

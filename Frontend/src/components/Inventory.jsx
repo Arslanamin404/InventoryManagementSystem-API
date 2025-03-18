@@ -2,15 +2,17 @@ import { Button } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import { showToast } from "../utils/showToast";
 import axiosInstance from "../api/api";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Inventory = () => {
   const [products, setProducts] = useState([]);
   const [slug, setSlug] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [page, setPage] = useState(1);
-  const [limit] = useState(5);
+  const [limit] = useState(10);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const fetchProducts = async () => {
     try {
@@ -50,6 +52,10 @@ export const Inventory = () => {
     setSlug(searchTerm);
   };
 
+  const handleProductClick = (id) => {
+    navigate(`/products/${id}`);
+  };
+
   return (
     <>
       <div className="mb-4 flex flex-col md:flex-row items-center justify-between gap-4">
@@ -61,10 +67,13 @@ export const Inventory = () => {
             onKeyDown={(e) => e.key === "Enter" && handleSearch()}
             className="flex h-10 w-full rounded-md border bg-white px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
           />
+          <Link
+            to={"/add-product"}
+            className="w-44 text-center px-4 py-3 text-sm font-medium text-white bg-blue-600 rounded-lg shadow hover:bg-blue-700 transition duration-300"
+          >
+            ADD PRODUCT
+          </Link>
         </div>
-        <button className="text-sm bg-blue-600 hover:bg-blue-700 duration-300">
-          ADD PRODUCT
-        </button>
       </div>
 
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -95,7 +104,8 @@ export const Inventory = () => {
                 products.map((product) => (
                   <tr
                     key={product._id}
-                    className="bg-white border-b border-gray-200 hover:bg-gray-100"
+                    className="bg-white border-b border-gray-200 hover:bg-gray-100 hover:cursor-pointer"
+                    onClick={() => handleProductClick(product._id)}
                   >
                     <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                       {product.slug}

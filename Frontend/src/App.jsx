@@ -16,6 +16,9 @@ import { PageNotFound } from "./components/PageNotFound";
 import { RequireAuth } from "./components/RequireAuth";
 import { Categories } from "./components/Categories";
 import { Subcategories } from "./components/Subcategories";
+import { AddProduct } from "./components/AddProduct";
+import ProductDetail from "./components/ProductDetail";
+import { EditProductForm } from "./components/EditProductForm";
 
 export const App = () => {
   return (
@@ -39,6 +42,12 @@ export const App = () => {
           <Route element={<RequireAuth />}>
             <Route path="profile" element={<Profile />} />
             <Route path="dashboard" element={<Dashboard />} />
+            <Route path="add-product" element={<AddProduct />} />
+            <Route path="products/:productId" element={<ProductDetail />} />
+            <Route
+              path="edit-product/:productId"
+              element={<EditProductForm />}
+            />
             <Route path="categories" element={<Categories />} />
             <Route path="subcategories" element={<Subcategories />} />
           </Route>

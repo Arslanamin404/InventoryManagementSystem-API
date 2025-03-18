@@ -13,6 +13,9 @@ import { Profile } from "./components/Profile";
 import Dashboard from "./components/Dashboard";
 import { Inventory } from "./components/Inventory";
 import { PageNotFound } from "./components/PageNotFound";
+import { RequireAuth } from "./components/RequireAuth";
+import { Categories } from "./components/Categories";
+import { Subcategories } from "./components/Subcategories";
 
 export const App = () => {
   return (
@@ -33,8 +36,12 @@ export const App = () => {
           <Route path="inventory" element={<Inventory />} />
 
           {/* protected */}
-          <Route path="profile" element={<Profile />} />
-          <Route path="dashboard" element={<Dashboard />} />
+          <Route element={<RequireAuth />}>
+            <Route path="profile" element={<Profile />} />
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="categories" element={<Categories />} />
+            <Route path="subcategories" element={<Subcategories />} />
+          </Route>
 
           {/* catch all other routes */}
           <Route path="*" element={<PageNotFound />} />

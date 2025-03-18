@@ -15,7 +15,7 @@ export const PageNotFound = () => {
         deleted.
       </Typography>
       <Link to="/" className="mt-6">
-        <button className="bg-blue-500 hover:bg-blue-600 duration-300 text-white px-6 py-2 rounded-lg shadow-md transition-all duration-300 transform hover:scale-105">
+        <button className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg shadow-md transition-all duration-300 transform hover:scale-105">
           Go Home
         </button>
       </Link>

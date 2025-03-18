@@ -13,7 +13,9 @@ export const AuthProvider = ({ children }) => {
   // Check if user is logged in
   const checkAuth = async () => {
     try {
-      const response = await axiosInstance.get("/users/profile");
+      const response = await axiosInstance.get("/users/profile", {
+        withCredentials: true,
+      });
       setUser(response.data.data);
       setRole(response.data.data.role);
     } catch (error) {

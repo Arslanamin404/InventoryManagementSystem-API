@@ -13,7 +13,7 @@ export class AuthControllers {
             const { first_name, last_name, username, email, password, phone_number } = req.body;
             const existingUser = await AuthServices.checkExistingUser(email);
             if (existingUser) {
-                return ApiResponse(res, 400, false, "User already registered")
+                return ApiResponse(res, 400, false, "User with this email already registered")
             }
 
             const otp = OtpUtils.generateOTP();

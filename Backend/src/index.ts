@@ -30,7 +30,7 @@ app.use(cookieParser())
 app.use("/api/v1/status", statusRouter)
 app.use("/api/v1/auth", authRouter)
 app.use("/api/v1/users", authenticate, userRouter);
-app.use("/api/v1/products", authenticate, productRouter);
+app.use("/api/v1/products", productRouter);
 app.use("/api/v1/categories", authenticate, categoryRouter);
 app.use("/api/v1/subcategories", authenticate, subCategoryRouter);
 app.use("/api/v1/inventory-logs", authenticate, inventoryLogRouter);

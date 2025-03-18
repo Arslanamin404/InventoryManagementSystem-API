@@ -1,4 +1,4 @@
-import { IUser } from './../interfaces/IUser';
+import { IUser } from '../interfaces/IUser';
 import { model, Model, Schema } from "mongoose"
 import bcrypt from "bcrypt"
 

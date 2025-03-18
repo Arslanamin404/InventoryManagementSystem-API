@@ -11,7 +11,7 @@ import { Package } from "lucide-react";
 import { useAuth } from "../contexts/AuthContext";
 
 function NavList() {
-  const { user, logout, loading } = useAuth();
+  const { user, logout, loading, role } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -22,11 +22,13 @@ function NavList() {
   const navItems = [
     { name: "Home", path: "/" },
     { name: "Inventory", path: "/inventory" },
-    { name: "Contact", path: "/contact" },
-    { name: "About", path: "/about" },
     ...(user
       ? [
-          { name: "Dashboard", path: "/dashboard" },
+          { name: "Categories", path: "/categories" },
+          { name: "Subcategories", path: "/subcategories" },
+          ...(role.toLowerCase() === "admin"
+            ? [{ name: "Dashboard", path: "/dashboard" }]
+            : []),
           { name: "Profile", path: "/profile" },
           { name: "Logout", path: "/" },
         ]

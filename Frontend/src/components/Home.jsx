@@ -23,7 +23,7 @@ export const Home = () => {
                 </div>
                 <div className="flex flex-col gap-2 min-[400px]:flex-row">
                   <Link
-                    to="login"
+                    to="dashboard"
                     className="inline-flex h-10 items-center justify-center rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2"
                   >
                     Access Dashboard <ArrowRight className="ml-2 h-4 w-4" />

@@ -7,6 +7,7 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [role, setRole] = useState("");
   const navigate = useNavigate();
 
   // Check if user is logged in
@@ -14,6 +15,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await axiosInstance.get("/users/profile");
       setUser(response.data.data);
+      setRole(response.data.data.role);
     } catch (error) {
       setUser(null);
     }
@@ -56,7 +58,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, role, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

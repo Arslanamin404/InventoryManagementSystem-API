@@ -48,19 +48,15 @@ This API supports inventory tracking, product categorization, and role-based acc
 ## 👥 User Management (Admin Only)
 
 ### `GET /users`
-
 - Get all users
 
 ### `GET /users/:id`
-
 - Get a specific user
 
 ### `PUT /users/:id`
-
 - Update user role/details
 
 ### `DELETE /users/:id`
-
 - Delete a user
 
 ---
@@ -68,11 +64,9 @@ This API supports inventory tracking, product categorization, and role-based acc
 ## 🙍‍♂️ Profile (Staff & Admin)
 
 ### `GET /profile`
-
 - View logged-in user's profile
 
 ### `PUT /profile`
-
 - Update logged-in user's profile
 
 ---
@@ -80,28 +74,45 @@ This API supports inventory tracking, product categorization, and role-based acc
 ## 🛒 Product Management (Staff & Admin)
 
 ### `POST /products`
-
 - Add a new product
 
 ### `GET /products`
-
 - Get all products
 
 ### `GET /products/:id`
-
 - Get product by ID
 
 ### `GET /products/slug/:slug`
-
 - Get product by slug
 
 ### `PUT /products/:id`
-
 - Update product info
 
 ### `DELETE /products/:id` _(Admin Only)_
-
 - Delete a product
+
+---
+
+### Product Stock Management (Staff & Admin)
+
+#### `PUT /products/increase-quantity/:id`
+- **Description**: Increase the product quantity by a specified amount.
+- **Access**: Staff & Admin
+- **Parameters**: Product ID in URL, quantity in request body.
+
+#### `PUT /products/decrease-quantity/:id`
+- **Description**: Decrease the product quantity by a specified amount.
+- **Access**: Staff & Admin
+- **Parameters**: Product ID in URL, quantity in request body.
+
+#### `PUT /products/update-quantity/:id`
+- **Description**: Update the product quantity to a new value.
+- **Access**: Staff & Admin
+- **Parameters**: Product ID in URL, new quantity in request body.
+
+#### `GET /products/isLowStock/:id`
+- **Description**: Check if a product is low on stock.
+- **Access**: Staff & Admin
 
 ---
 
@@ -110,29 +121,23 @@ This API supports inventory tracking, product categorization, and role-based acc
 ### Admin Only
 
 #### `POST /categories`
-
 - Create a new category
 
 #### `PUT /categories/:id`
-
 - Update a category
 
 #### `DELETE /categories/:id`
-
 - Delete a category
 
 ### Staff & Admin
 
 #### `GET /categories`
-
 - Get all categories
 
 #### `GET /categories/:id`
-
 - Get category by ID
 
 #### `GET /categories/slug/:slug`
-
 - Get category by slug
 
 ---
@@ -142,29 +147,23 @@ This API supports inventory tracking, product categorization, and role-based acc
 ### Admin Only
 
 #### `POST /subcategories`
-
 - Create a subcategory
 
 #### `PUT /subcategories/:id`
-
 - Update a subcategory
 
 #### `DELETE /subcategories/:id`
-
 - Delete a subcategory
 
 ### Staff & Admin
 
 #### `GET /subcategories`
-
 - Get all subcategories
 
 #### `GET /subcategories/:id`
-
 - Get subcategory by ID
 
 #### `GET /subcategories/slug/:slug`
-
 - Get subcategory by slug
 
 ---
@@ -172,24 +171,12 @@ This API supports inventory tracking, product categorization, and role-based acc
 ## 📦 Inventory Logs (Staff & Admin)
 
 ### `POST /inventory-logs`
-
 - Create inventory log (when product stock is changed)
 
 ### `GET /inventory-logs`
-
 - Get all logs (filterable by product, user, date)
 
 ### `GET /inventory-logs/:id`
-
 - Get a specific inventory log by ID
-
----
-
-## 📎 Notes
-
-- All endpoints are protected and require JWT.
-- Actions are logged via Inventory Logs when stock is changed.
-- Products have a `lowStockThreshold` field to monitor minimum quantity.
-- Use pagination and filtering where supported.
 
 ---
